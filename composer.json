@@ -1,0 +1,19 @@
+{
+    "name": "icans/logging-bundle",
+    "description": "ICANS Logging Bundle",
+    "authors": [
+        {
+            "name": "ICANS GmbH",
+            "homepage": "http://www.icans-gmbh.com"
+        }
+    ],
+    "require": {
+        "php":                                  ">=5.3.3"
+    },
+    "target-dir": "Icans/Ecf/Bundle/Logging",
+    "autoload": {
+        "psr-0": {
+            "Icans\\Ecf\\Bundle\\Logging": ""
+        }
+    }
+}
