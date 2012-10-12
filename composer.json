@@ -8,12 +8,13 @@
         }
     ],
     "require": {
-        "php":                                  ">=5.3.3"
+        "php":                                  ">=5.3.3",
+        "icans/logging-component":              "self.version"
     },
-    "target-dir": "Icans/Ecf/Bundle/Logging",
+    "target-dir": "Icans/Ecf/Bundle/LoggingBundle",
     "autoload": {
         "psr-0": {
-            "Icans\\Ecf\\Bundle\\Logging": ""
+            "Icans\\Ecf\\Bundle\\LoggingBundle": ""
         }
     }
 }
