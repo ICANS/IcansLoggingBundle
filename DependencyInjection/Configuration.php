@@ -41,8 +41,20 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->arrayNode('rabbit_mq_client')->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('additionalProperties')->addDefaultsIfNotSet()
+                                ->defaultValue(array())->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+
+        $rootNode
+            ->children()
                 ->arrayNode('logger')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('formatter')->defaultValue('monolog.formatter.json')->end()
                         ->scalarNode('log_level')->defaultValue(Logger::INFO)->end()
                         ->booleanNode('bubbles')->defaultValue(true)->end()
                     ->end()
