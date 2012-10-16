@@ -33,10 +33,6 @@
             <argument type="service" id="icans.logging.thrift.flume.protocol"/>
         </service>
 
-        <service id="icans.logging.monolog.processor" class="ICANS\Bundle\IcansLoggingBundle\AnalyticsProcessor">
-            <argument type="service" id="service_container"/>
-            <tag name="icans.analytics.postprocessor" />
-        </service>
 
         <service id="icans.logging.service.flume" class="%icans.logging.thrift.flume.handler.class%">
             <argument type="service" id="icans.logging.thrift.flume.transport"/>
@@ -85,78 +81,6 @@
                 <argument>extra</argument>
                 <argument>ScriptName</argument>
             </argument>
-        </service>
-
-        <!-- EventDispatcher -->
-        <service id="icans.logging.event_factory" class="ICANS\Bundle\IcansLoggingBundle\EventFactory">
-            <argument type="service" id="service_container" />
-            <argument type="service" id="event_dispatcher"/>
-            <argument>ec</argument>
-            <argument>%icans_multi_ec.multi_ec_id%</argument>
-            <argument type="service" id="logger"/>
-        </service>
-
-        <!-- EventListener -->
-        <service id="icans.logging.service.pageeventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\PageEventListener">
-            <argument type="service" id="logger" />
-            <argument type="service" id="icans.multiEC.service" />
-            <tag name="kernel.event_listener" event="kernel.response" method="onPageResponseEvent"/>
-            <tag name="kernel.event_listener" event="kernel.request" method="onPageRequestEvent"/>
-        </service>
-        <!-- why is there no content event listener? -->
-        <service id="icans.logging.service.customereventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\CustomerEventListener">
-            <argument type="service" id="logger" />
-            <!-- customer events -->
-            <tag name="kernel.event_listener" event="icans.customer.register" method="onRegisterEvent"/>
-            <tag name="kernel.event_listener" event="icans.customer.migrate" method="onMigrationEvent"/>
-            <tag name="kernel.event_listener" event="icans.customer.verification" method="onVerificationEvent"/>
-            <tag name="kernel.event_listener" event="icans.customer.request_verification" method="onRequestVerificationEvent"/>
-            <tag name="kernel.event_listener" event="icans.customer.rolechange" method="onRoleChangeEvent"/>
-            <!-- content events -->
-            <tag name="kernel.event_listener" event="icans.content.create" method="onCreateContentEvent"/>
-            <tag name="kernel.event_listener" event="icans.content.update" method="onChangeContentEvent"/>
-            <tag name="kernel.event_listener" event="icans.content.deliveredfallback" method="onFallbackContentDeliveredEvent"/>
-            <tag name="kernel.event_listener" event="icans.content.view" method="onViewContentEvent"/>
-            <tag name="kernel.event_listener" event="icans.customer.statuslevelChanged" method="onStatusLevelChange"/>
-        </service>
-        <service id="icans.logging.service.communicationobjecteventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\CommunicationObjectEventListener">
-            <argument type="service" id="logger" />
-            <tag name="kernel.event_listener" event="icans.commobject.create" method="onCreateCommObjectEvent"/>
-        </service>
-        <service id="icans.logging.service.imageeventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\ImageEventListener">
-            <argument type="service" id="logger" />
-            <tag name="kernel.event_listener" event="icans.image.resize" method="onResizeImageEvent"/>
-        </service>
-        <service id="icans.logging.service.formeventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\FormEventListener">
-            <argument type="service" id="logger" />
-            <tag name="kernel.event_listener" event="icans.form.error" method="onFormErrorEvent"/>
-        </service>
-        <service id="icans.logging.service.searcheventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\SearchEventListener">
-            <argument type="service" id="logger" />
-            <tag name="kernel.event_listener" event="icans.search.query" method="onSearchQueryEvent"/>
-        </service>
-        <service id="icans.logging.service.videoeventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\VideoEventListener">
-            <argument type="service" id="logger" />
-            <tag name="kernel.event_listener" event="icans.video.error" method="onVideoErrorEvent"/>
-            <tag name="kernel.event_listener" event="icans.video.publish" method="onVideoPublishEvent"/>
-            <tag name="kernel.event_listener" event="icans.video.cleanup" method="onVideoCleanupEvent"/>
-        </service>
-        <service id="icans.logging.service.reflexmaileventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\ReflexmailEventListener">
-            <argument type="service" id="logger" />
-            <tag name="kernel.event_listener" event="icans.reflexmail" method="onMessageSentEvent"/>
-        </service>
-        <service id="icans.logging.service.notificationeventlistener"
-                 class="ICANS\Bundle\IcansLoggingBundle\Listener\NotificationEventListener">
-            <argument type="service" id="logger" />
-            <tag name="kernel.event_listener" event="icans.notification" method="onMessageSentEvent"/>
         </service>
     </services>
 </container>
