@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="icans.logging.thrift.socket.class">Thrift\Transport\TSocket</parameter>
+        <parameter key="icans.logging.thrift.transport.class">Thrift\Transport\TBufferedTransport</parameter>
+        <parameter key="icans.logging.thrift.protocol.class">Thrift\Protocol\TBinaryProtocolAccelerated</parameter>
+        <parameter key="icans.logging.thrift.flume.client.class">
+            ICANS\Component\IcansLoggingComponent\Flume\ThriftFlumeEventServerClient
+        </parameter>
+        <parameter key="icans.logging.thrift.flume.handler.class">
+            ICANS\Component\IcansLoggingComponent\Handler\ThriftFlumeHandler
+        </parameter>
+    </parameters>
+    <services>
+        <service id="icans.logging.thrift.flume.transport.type" class="%icans.logging.thrift.socket.class%"
+                 public="false">
+            <argument>%icans_logging.flume_client.host%</argument>
+            <argument>%icans_logging.flume_client.port%</argument>
+        </service>
+
+        <service id="icans.logging.thrift.flume.transport" class="%icans.logging.thrift.transport.class%" public="false">
+            <argument type="service" id="icans.logging.thrift.flume.transport.type"/>
+        </service>
+
+        <service id="icans.logging.thrift.flume.protocol" class="%icans.logging.thrift.protocol.class%" public="false">
+            <argument type="service" id="icans.logging.thrift.flume.transport"/>
+        </service>
+
+        <service id="icans.logging.thrift.flume.client"
+                 class="%icans.logging.thrift.flume.client.class%" public="false">
+            <argument type="service" id="icans.logging.thrift.flume.protocol"/>
+        </service>
+
+
+        <service id="icans.logging.service.flume" class="%icans.logging.thrift.flume.handler.class%">
+            <argument type="service" id="icans.logging.thrift.flume.transport"/>
+            <argument type="service" id="icans.logging.thrift.flume.client"/>
+            <argument>%icans_logging.logger.log_level%</argument>
+            <argument>%icans_logging.logger.bubbles%</argument>
+        </service>
+    </services>
+</container>
+
