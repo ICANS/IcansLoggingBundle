@@ -1,5 +1,6 @@
 {
     "name": "icans/logging-bundle",
+    "type": "symfony-bundle",
     "description": "ICANS Logging Bundle",
     "authors": [
         {
@@ -9,12 +10,13 @@
     ],
     "require": {
         "php":                                  ">=5.3.3",
-        "icans/logging-component":              "self.version"
+        "icans/logging-component":              "self.version",
+        "symfony/framework-bundle":             "2.*"
     },
-    "target-dir": "Icans/Ecf/Bundle/LoggingBundle",
+    "target-dir": "ICANS/Bundle/LoggingBundle",
     "autoload": {
         "psr-0": {
-            "Icans\\Ecf\\Bundle\\LoggingBundle": ""
+            "ICANS\\Bundle\\LoggingBundle": ""
         }
     }
 }
