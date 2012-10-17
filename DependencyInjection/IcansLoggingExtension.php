@@ -12,6 +12,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * IcansLogging extension to enable automatic registration of services.
@@ -40,20 +41,16 @@ class IcansLoggingExtension extends Extension
         $container->setParameter('icans_logging.flume_client.recvTimeout', $config['flume_client']['recvTimeout']);
 
         //rabbit
-        $container->setParameter('icans_logging.rabbit_mq.addition', $config['flume_client']['recvTimeout']);
+        $container->setParameter('icans_logging.rabbitmq.routing_key', $config['rabbit_mq_client']['routing_key']);
 
         $definition = $container->getDefinition('icans.logging.service.rabbit_mq');
         $definition->addMethodCall(
             'addAdditionalProperties',
-            array(new Reference($config['rabbit_mq_client']['additionalProperties']))
+            array($config['rabbit_mq_client']['additional_properties'])
         );
 
         //all
-        $definition = $container->getDefinition($config['logger']['formatter']);
-        $definition->addMethodCall(
-            'setFormatter',
-            array(new Reference($config['logger']['formatter']))
-        );
+        $container->setParameter('icans_logging.formatter', $config['logger']['formatter']);
 
         $container->setParameter('icans_logging.logger.log_level', $config['logger']['log_level']);
         $container->setParameter('icans_logging.logger.bubbles', $config['logger']['bubbles']);
