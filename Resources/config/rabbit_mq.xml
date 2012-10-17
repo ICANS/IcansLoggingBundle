@@ -4,12 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="icans.logging.rabbit_mq.handler.class">
-            ICANS\Component\IcansLoggingComponent\Handler\RabbitMqHandler
-        </parameter>
-        <parameter key="icans.logging.rabbit_mq.message_producer.class">
-            ICANS\Bundle\IcansLoggingBundle\Handler\RabbitMq\RabbitMqMessageProducer
-        </parameter>
+        <parameter key="icans.logging.rabbit_mq.handler.class">ICANS\Component\IcansLoggingComponent\Handler\RabbitMqHandler</parameter>
+        <parameter key="icans.logging.rabbit_mq.message_producer.class">ICANS\Bundle\IcansLoggingBundle\Handler\RabbitMq\RabbitMqMessageProducer</parameter>
     </parameters>
     <services>
         <service id="icans.logging.rabbit_mq.message_producer" class="%icans.logging.rabbit_mq.message_producer.class%">
