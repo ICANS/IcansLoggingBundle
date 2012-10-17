@@ -4,14 +4,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="icans.logging.rabbit_mq.handler.class">ICANS\Bundle\IcansLoggingBundle\Handler\RabbitMqHandler</parameter>
+        <parameter key="icans.logging.rabbit_mq.handler.class">
+            ICANS\Component\IcansLoggingComponent\Handler\RabbitMqHandler
+        </parameter>
+        <parameter key="icans.logging.rabbit_mq.message_producer.class">
+            ICANS\Bundle\IcansLoggingBundle\Handler\RabbitMq\RabbitMqMessageProducer
+        </parameter>
     </parameters>
     <services>
+        <service id="icans.logging.rabbit_mq.message_producer" class="%icans.logging.rabbit_mq.message_producer.class%">
+            <argument type="service" id="old_sound_rabbit_mq.message_event_producer" />
+        </service>
         <service id="icans.logging.service.rabbit_mq" class="%icans.logging.rabbit_mq.handler.class%">
             <argument type="service" id="service_container" />
             <argument>%icans_logging.rabbitmq.routing_key%</argument>
             <argument>%icans_logging.logger.log_level%</argument>
             <argument>%icans_logging.logger.bubbles%</argument>
+            <call method="setEventMessageProducer">
+                <argument type="service" id="monolog.formatter.json"/>
+            </call>
         </service>
     </services>
 </container>
