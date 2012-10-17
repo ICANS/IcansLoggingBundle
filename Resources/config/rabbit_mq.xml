@@ -21,7 +21,7 @@
             <argument>%icans_logging.logger.log_level%</argument>
             <argument>%icans_logging.logger.bubbles%</argument>
             <call method="setEventMessageProducer">
-                <argument type="service" id="monolog.formatter.json"/>
+                <argument type="service" id="icans.logging.rabbit_mq.message_producer"/>
             </call>
         </service>
     </services>
