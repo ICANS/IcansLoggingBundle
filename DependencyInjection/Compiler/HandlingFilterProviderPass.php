@@ -38,5 +38,12 @@ class HandlingFilterProviderPass implements CompilerPassInterface
                 $definition->addMethodCall('addHandlingFilter', array(new Reference($id)));
             }
         }
+
+        //all
+        $definition = $container->getDefinition($container->getParameter('icans.logging.formatter'));
+        $definition->addMethodCall(
+            'setFormatter',
+            array(new Reference($container->getParameter('icans.logging.formatter')))
+        );
     }
 }
