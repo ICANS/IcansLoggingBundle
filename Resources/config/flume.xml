@@ -7,12 +7,8 @@
         <parameter key="icans.logging.thrift.socket.class">Thrift\Transport\TSocket</parameter>
         <parameter key="icans.logging.thrift.transport.class">Thrift\Transport\TBufferedTransport</parameter>
         <parameter key="icans.logging.thrift.protocol.class">Thrift\Protocol\TBinaryProtocolAccelerated</parameter>
-        <parameter key="icans.logging.thrift.flume.client.class">
-            ICANS\Component\IcansLoggingComponent\Flume\ThriftFlumeEventServerClient
-        </parameter>
-        <parameter key="icans.logging.thrift.flume.handler.class">
-            ICANS\Component\IcansLoggingComponent\Handler\ThriftFlumeHandler
-        </parameter>
+        <parameter key="icans.logging.thrift.flume.client.class">ICANS\Component\IcansLoggingComponent\Flume\ThriftFlumeEventServerClient</parameter>
+        <parameter key="icans.logging.thrift.flume.handler.class">ICANS\Component\IcansLoggingComponent\Handler\ThriftFlumeHandler</parameter>
     </parameters>
     <services>
         <service id="icans.logging.thrift.flume.transport.type" class="%icans.logging.thrift.socket.class%"
