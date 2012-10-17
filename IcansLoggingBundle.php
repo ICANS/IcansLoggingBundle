@@ -8,7 +8,7 @@
  * @copyright   ICANS GmbH
  * @version     $Id: $
  */
-namespace Icans\Ecf\Bundle\LoggingBundle;
+namespace ICANS\Bundle\IcansLoggingBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
