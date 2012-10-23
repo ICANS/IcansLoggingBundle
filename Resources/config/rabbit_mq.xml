@@ -12,7 +12,6 @@
             <argument type="service" id="old_sound_rabbit_mq.message_event_producer" />
         </service>
         <service id="icans.logging.service.rabbit_mq" class="%icans.logging.rabbit_mq.handler.class%">
-            <argument type="service" id="service_container" />
             <argument>%icans_logging.rabbitmq.routing_key%</argument>
             <argument>%icans_logging.logger.log_level%</argument>
             <argument>%icans_logging.logger.bubbles%</argument>
