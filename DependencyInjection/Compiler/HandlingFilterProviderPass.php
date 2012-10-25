@@ -28,6 +28,7 @@ class HandlingFilterProviderPass implements CompilerPassInterface
             foreach ($container->findTaggedServiceIds('icans.logging.handling_filter.flume') as $id => $attributes) {
                 $definition->addMethodCall('addHandlingFilter', array(new Reference($id)));
             }
+            $this->addFormatter($container, $definition);
         }
 
         // for rabbit-mq
@@ -37,13 +38,20 @@ class HandlingFilterProviderPass implements CompilerPassInterface
                      $attributes) {
                 $definition->addMethodCall('addHandlingFilter', array(new Reference($id)));
             }
+            $this->addFormatter($container, $definition);
         }
+    }
 
-        //all
-        $definition = $container->getDefinition($container->getParameter('icans.logging.formatter'));
+    /**
+     * @param ContainerBuilder $container
+     * @param mixed $definition
+     */
+    private function addFormatter(ContainerBuilder $container, $definition)
+    {
+        $containerParameter = $container->getParameter('icans_logging.formatter');
         $definition->addMethodCall(
             'setFormatter',
-            array(new Reference($container->getParameter('icans.logging.formatter')))
+            array(new Reference($containerParameter))
         );
     }
 }
