@@ -9,7 +9,7 @@
  */
 namespace ICANS\Bundle\IcansLoggingBundle\Handler\RabbitMq;
 
-use ICANS\Component\IcansLoggingComponent\AMQPMessageProducerInterface;
+use ICANS\Component\IcansLoggingComponent\Api\V1\AMQPMessageProducerInterface;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 

@@ -41,7 +41,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('rabbit_mq_client')
+                ->arrayNode('rabbit_mq_client')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('routing_key')->defaultValue('')->end()
                         ->variableNode('additional_properties')->defaultValue(array())->end()
