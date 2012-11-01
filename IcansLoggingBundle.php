@@ -10,6 +10,11 @@
  */
 namespace ICANS\Bundle\IcansLoggingBundle;
 
+use ICANS\Bundle\IcansLoggingBundle\DependencyInjection\Compiler\HandlingFilterProviderPass;
+use ICANS\Bundle\IcansLoggingBundle\DependencyInjection\Compiler\PostprocessorProviderPass;
+use ICANS\Bundle\IcansLoggingBundle\DependencyInjection\Compiler\WriteFilterProviderPass;
+
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -18,5 +23,15 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class IcansLoggingBundle extends Bundle
 {
+    /**
+     * {@inheritDoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
 
+        $container->addCompilerPass(new HandlingFilterProviderPass());
+        $container->addCompilerPass(new WriteFilterProviderPass());
+        $container->addCompilerPass(new PostprocessorProviderPass());
+    }
 }
