@@ -16,7 +16,7 @@
         "symfony/yaml":                         "2.0.*",
         "oldsound/rabbitmq-bundle":             "dev-master"
     },
-    "target-dir": "ICANS/Bundle/LoggingBundle",
+    "target-dir": "ICANS/Bundle/IcansLoggingBundle",
     "autoload": {
         "psr-0": {
             "ICANS\\Bundle\\IcansLoggingBundle": ""
