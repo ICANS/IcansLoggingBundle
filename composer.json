@@ -19,7 +19,7 @@
     "target-dir": "ICANS/Bundle/LoggingBundle",
     "autoload": {
         "psr-0": {
-            "ICANS\\Bundle\\LoggingBundle": ""
+            "ICANS\\Bundle\\IcansLoggingBundle": ""
         }
     }
 }
