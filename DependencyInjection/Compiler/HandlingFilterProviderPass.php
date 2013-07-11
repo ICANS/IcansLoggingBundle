@@ -10,6 +10,7 @@ namespace ICANS\Bundle\IcansLoggingBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Monolog\Formatter\JsonFormatter;
 
 /**
  * HandlingFilterProviderPass collects all configured (tagged) filters for handling method and adds them to
@@ -49,9 +50,15 @@ class HandlingFilterProviderPass implements CompilerPassInterface
     private function addFormatter(ContainerBuilder $container, $definition)
     {
         $containerParameter = $container->getParameter('icans_logging.formatter');
+        if ($containerParameter == null) {
+            $container->register('monolog.formatter.json', 'Monolog\Formatter\JsonFormatter');
+            $containerParameter = 'monolog.formatter.json';
+        }
+
         $definition->addMethodCall(
             'setFormatter',
             array(new Reference($containerParameter))
         );
+
     }
 }

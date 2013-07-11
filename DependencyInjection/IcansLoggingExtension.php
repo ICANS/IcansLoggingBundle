@@ -36,9 +36,11 @@ class IcansLoggingExtension extends Extension
         $config = $this->processConfiguration(new Configuration(), $configs);
 
         //flume
-        $container->setParameter('icans_logging.flume_client.host', $config['flume_client']['host']);
-        $container->setParameter('icans_logging.flume_client.port', $config['flume_client']['port']);
-        $container->setParameter('icans_logging.flume_client.recvTimeout', $config['flume_client']['recvTimeout']);
+        if ($config['flume_client'] != null) {
+            $container->setParameter('icans_logging.flume_client.host', $config['flume_client']['host']);
+            $container->setParameter('icans_logging.flume_client.port', $config['flume_client']['port']);
+            $container->setParameter('icans_logging.flume_client.recvTimeout', $config['flume_client']['recvTimeout']);
+        }
 
         //rabbit
         $container->setParameter('icans_logging.rabbitmq.routing_key', $config['rabbit_mq_client']['routing_key']);

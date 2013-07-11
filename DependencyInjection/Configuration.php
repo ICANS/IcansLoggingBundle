@@ -54,7 +54,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('logger')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('formatter')->defaultValue('monolog.formatter.json')->end()
+                        ->scalarNode('formatter')->defaultNull()->end()
                         ->scalarNode('log_level')->defaultValue(Logger::INFO)->end()
                         ->booleanNode('bubbles')->defaultValue(true)->end()
                     ->end()
